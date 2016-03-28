@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/teocollin1995/complex.svg?branch=master)](https://travis-ci.org/teocollin1995/complex)
+
 # complex
 A complex number library for Elm. Someone needed to write one. 
 
