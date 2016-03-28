@@ -3,6 +3,8 @@ node_js:
   - "5.2.0"
 before_script:
   - sudo apt-get install python
+  - sudo apt-get install python-pip
+  - sudo pip install numpy
   - cd tests
   - chmod u+x testgen.py
   - ./testgen.py Tests.elm TestsRunner.elm 
