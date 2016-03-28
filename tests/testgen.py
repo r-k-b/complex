@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import numpy as np 
+#np.set_printoptions(precision=32)
+#np.set_printoptions(formatter={'float': lambda x: "{0:0.32f}".format(x)})
+
 import random
 import sys
 from itertools import chain, izip, repeat, islice
@@ -20,12 +23,12 @@ def argstring(listofargs):
 
 #write a test 
 def test_write(name,elm_function, args, result ):
-    print("{0} : Test\n{0} = test \"{0}\" (assert ((Basics.abs ((Complex.abs ({1} {2})) - (Complex.abs ({3})))) < 0.001))".format(name,elm_function,argstring(args),result))
+    print("{0} : Test\n{0} = test \"{0}\" (assert ((Basics.abs ((Complex.abs ({1} {2})) - (Complex.abs ({3})))) < 0.0001))".format(name,elm_function,argstring(args),result))
     return(name)
 
 def suite_write(name, nargs, nruns, elm_function, arg_gen, result_gen, type_transform):
     #names = map(lambda x: name + str(x), range(0,nruns))
-    args_gen = lambda x: map(lambda x: arg_gen(-1000,1000), range(0,nargs))
+    args_gen = lambda x: map(lambda x: arg_gen(-10,10), range(0,nargs))
     tnames = []
     for x in range(0,nruns):
         tname = name + str(x)
@@ -94,8 +97,12 @@ def run():
 def random_complex(min,max):
     return np.complex(random.uniform(min,max),random.uniform(min,max))
 
+
+
 def c_to_elm_type(c):
-    return("(Complex.complex {0} {1})".format(np.real(c),np.imag(c)))
+    a = ("{%0.32f}"%np.real(c)).replace('{','').replace('}','')
+    b = ("{%0.32f}"%np.imag(c)).replace('{','').replace('}','')
+    return("(Complex.complex {0} {1})".format(a,b))
 
 
 
@@ -122,7 +129,31 @@ def add_binary_complex(name,runs,elm_function,result_gen):
 def cmult(a,b):
     return(a*b)
 
-add_binary_complex("complex_mult",200,"Complex.mult",cmult)
-add_unary_complex("complex_abs",200,"Complex.fromReal <| Complex.abs",np.abs)
+def realsin(a):
+    return (np.sin(np.real(a)))
 
+def multlog(a,b):
+    return(b*np.log(a))
+
+def newexp(a,b):
+    return(np.exp(b*np.log(a)))
+
+add_binary_complex("complex_mult",200,"Complex.mult",cmult)
+add_binary_complex("complex_div",200,"Complex.div",lambda x,y: x/y)
+add_unary_complex("complex_abs",200,"Complex.fromReal <| Complex.abs",np.abs)
+add_unary_complex("complex_sign",200,"Complex.fromReal <| Complex.sgn",np.sign)
+add_unary_complex("complex_sqrt",200,"Complex.sqrt",np.sqrt)
+add_unary_complex("complex_arg",200,"Complex.fromReal <| Complex.arg",np.angle)
+add_unary_complex("complex_ln",200," Complex.ln",np.log)
+add_unary_complex("complex_exp",200,"Complex.exp",np.exp)
+add_binary_complex("complex_pow",200,"Complex.pow",np.power)
+add_unary_complex("complex_cos",200,"Complex.ccos",np.cos)
+add_unary_complex("complex_sin",200,"Complex.csin",np.sin)
+add_unary_complex("complex_tan",200,"Complex.ctan",np.tan)
+add_unary_complex("complex_asin",200,"Complex.casin",np.arcsin)
+add_unary_complex("complex_acos",200,"Complex.cacos",np.arccos)
+add_unary_complex("complex_atan",200,"Complex.catan",np.arctan)
+#add_binary_complex("complex_mult_log",200,"(\z w -> Complex.mult w (Complex.ln z))",multlog )
+#add_binary_complex("new_pow",200,"Complex.pow",newexp)
+#add_unary_complex("realsine", 1000, "Complex.fromReal <| sin <| Complex.real", realsin )
 run()
