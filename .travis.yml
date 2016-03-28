@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "5.2.0"
+before_script:
+  - cd tests
+  - chmod u+x testgen.py
+  - ./testgen.py Tests.elm TestsRunner.elm 
+  - npm install -g elm elm-test
+  - elm-package install -y
+  - elm make TestRunner.elm
+script: elm-test TestRunner.elm
