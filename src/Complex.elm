@@ -27,7 +27,7 @@ module Complex (complex,i,one,zero,real,imaginary,fromReal,abs,conjugate, negati
 type alias Complex = {re: Float, im: Float}
 {-| Generates a complex number. 
 
-    complex 1 2 = 1+2i
+    complex 1 2 == 1+2i
 
 -}
 complex : Float -> Float -> Complex
@@ -83,7 +83,7 @@ imaginary c = c.im
 
 {-| Creates a complex number from one real numer. 
 
-    fromReal 5 = 5 + 0i
+    fromReal 5 == 5 + 0i
 
 -}
 
@@ -106,8 +106,8 @@ abs c =
 
 {-| Returns the conjugate of a complex number 
 
-    conjugate 2+3i = 2 - 3i
-    conjugate 2-3i = 2+3i
+    conjugate 2+3i == 2 - 3i
+    conjugate 2-3i == 2+3i
 
 -}
 
@@ -247,6 +247,8 @@ ln = flip nln 0
 euler : Float -> Complex
 euler x = 
   {re=Basics.cos x, im=Basics.sin x }
+
+
 {-| The exponent of a complex number.
 
 -}
@@ -269,11 +271,13 @@ pow z w = if z == zero then zero else  exp (mult w (ln z))
 cos : Complex -> Complex 
 cos z = div (add (exp (mult i z)) (exp (negation (mult i z)))) {re = 2, im = 0}
 
+
 {-| Complex sine.
 
 -}
 sin : Complex -> Complex
 sin z =  div (sub (exp (mult i z)) (exp (negation (mult i z)))) {re = 0, im = 2}
+
 
 {-| Complex tangent.
 
@@ -305,6 +309,7 @@ acos = flip ncacos 0
 
 ncacos : Complex -> (Int -> Complex)
 ncacos z = \k -> sub {re=Basics.pi/2, im =0} (ncasin z k)
+
 
 {-| Complex inverse tan.
 
