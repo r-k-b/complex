@@ -10,4 +10,4 @@ before_script:
   - ./testgen.py Tests.elm TestsRunner.elm 
   - npm install -g elm elm-test
   - elm-package install -y
-script: elm-test TestRunner.elm
+script: elm-test TestsRunner.elm
