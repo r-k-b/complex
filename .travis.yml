@@ -5,9 +5,8 @@ before_script:
   - sudo apt-get install python
   - sudo apt-get install python-pip
   - sudo -H pip install numpy
-  - cd tests
-  - chmod u+x testgen.py
-  - ./testgen.py Tests.elm TestsRunner.elm 
   - npm install -g elm elm-test
   - elm-package install -y
-script: elm-test TestsRunner.elm
+script:
+    - cd tests
+    - make test
