@@ -42,7 +42,7 @@ def suite_write(name, nargs, nruns, elm_function, arg_gen, result_gen, type_tran
 
 
 def testfile_write(names,nargss,nrunss,elm_functions,args_gens,result_gens,type_transforms,headers):
-    print("module Tests where")
+    print("module Tests exposing (allTests)")
     for x in headers:
         print(x)
     all_tests = []
@@ -66,20 +66,13 @@ headers.append("import Complex")
 headers.append("import ElmTest exposing (..)")
 
 testRunnerScript = """
-module Main where
---https://github.com/Bogdanp/elm-combine/blob/2.0.1/tests/TestRunner.elm testing structure
-import ElmTest exposing (consoleRunner)
-import Console exposing (IO, run)
-import Task
+-- https://github.com/elm-community/elm-test/tree/1.1.0#running-tests
+import ElmTest exposing (runSuite)
 
 import Tests
 
-
-console : IO ()
-console = consoleRunner Tests.allTests
-
-port runner : Signal (Task.Task x ())
-port runner = run console
+main =
+    runSuite Tests.allTests
 """
 
 def run():
