@@ -1,4 +1,4 @@
-module Complex (complex,i,one,zero,real,imaginary,fromReal,abs,conjugate, negation, add, sub, mult, div, sgn, sqrt,arg,ln,exp,pow,cos,sin,tan,asin,acos,atan, euler) where
+module Complex exposing (complex,i,one,zero,real,imaginary,fromReal,abs,conjugate, negation, add, sub, mult, div, sgn, sqrt,arg,ln,exp,pow,cos,sin,tan,asin,acos,atan, euler)
 
 {-| The complex module allows you to work with complex numbers. There is not much else to say. We have basic constructors, basic operations, trig, exponentials, and logarithms. More may be added in the future. 
 
