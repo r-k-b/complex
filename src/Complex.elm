@@ -193,15 +193,16 @@ sgn c =
 sqrt : Complex ->  Complex
 sqrt c1 = 
   let
-  gamma = ((c1.re + (abs c1)) /2)^(0.5)
-  delta = (((-1) * c1.re + (abs c1)) /2)^(0.5)
+    gamma = ((c1.re + (abs c1)) /2)^(0.5)
+    delta = (((-1) * c1.re + (abs c1)) /2)^(0.5)
+    fst (a, b) = a
   in
     fst ({re=gamma, im=delta}, {re = (-1)*gamma, im = (-1)* delta})
 
 
 
 --https://hackage.haskell.org/package/base-4.8.2.0/docs/src/GHC.Float.html#atan2
-atan2 : number -> number' -> Float
+atan2 : Float -> Float -> Float
 atan2 y x = 
   if x > 0 then Basics.atan (y/x)
   else if x == 0 && y > 0 then pi / 2
