@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "summary": "An elm module for working with complex numbers.",
     "repository": "https://github.com/teocollin1995/complex.git",
     "license": "BSD3",
